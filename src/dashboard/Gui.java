@@ -2,11 +2,20 @@ package dashboard;
 
 import java.awt.EventQueue;
 
+
+
+
+
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
+import javax.swing.JLabel;
+import javax.swing.JSplitPane;
+import javax.swing.JScrollPane;
+import javax.swing.JInternalFrame;
 
 public class Gui {
 
@@ -49,13 +58,14 @@ public class Gui {
 		panel.setBounds(10, 0, 153, 375);
 		frame.getContentPane().add(panel);
 		
-		JTextPane txtpnAvailableFactory = new JTextPane();
-		txtpnAvailableFactory.setText("Available Factories");
-		panel.add(txtpnAvailableFactory);
+		JPanel Charts = new JPanel();
+		Charts.setBounds(163, 0, 788, 375);
+		frame.getContentPane().add(Charts);
+		Charts.setLayout(null);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(163, 0, 788, 375);
-		frame.getContentPane().add(panel_1);
+		JLabel lblRealtimeCharts = new JLabel("Real-Time Charts");
+		lblRealtimeCharts.setBounds(214, 11, 116, 15);
+		Charts.add(lblRealtimeCharts);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(10, 374, 473, 217);
