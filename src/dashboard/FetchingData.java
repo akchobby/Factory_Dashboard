@@ -15,7 +15,7 @@ public class FetchingData {
 
     public void fetchAvailableBoards() {
         for (int ip : ipList) {
-            String host_ip = "192.168.0.".concat(Integer.toString(ip));
+            String host_ip = "192.168.47.".concat(Integer.toString(ip));
             System.out.print("Attempting connection to " + host_ip + ": ");
             try {
                 Socket clientSocket;
