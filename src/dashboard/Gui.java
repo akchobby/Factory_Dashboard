@@ -3,6 +3,7 @@ package dashboard;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -34,7 +35,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JScrollPane;
 import javax.swing.JInternalFrame;
 
-public class Gui extends ApplicationFrame implements Runnable{
+public class Gui extends ApplicationFrame {
 
 	private JFrame frame;
 
@@ -93,7 +94,7 @@ public class Gui extends ApplicationFrame implements Runnable{
 		frame.getContentPane().add(panel);
 		
 		JPanel Charts = new JPanel();
-		Charts.setBounds(163, 0, 788, 375);
+		Charts.setBounds(175, 0, 811, 375);
 		frame.getContentPane().add(Charts);
 		Charts.setLayout(null);
 		
@@ -102,66 +103,26 @@ public class Gui extends ApplicationFrame implements Runnable{
 		Charts.add(lblRealtimeCharts);
 		
 		JPanel Chart_1 = new JPanel();
-		Chart_1.setBounds(12, 38, 239, 263);
+		Chart_1.setBounds(12, 38, 251, 263);
 		Charts.add(Chart_1);
-		
-		XYDataset data = new XYSeriesCollection(this.series);
-		JFreeChart chart = ChartFactory.createXYLineChart("Temperature graph", "Time",
-		    "Temperature (deg C)", data, PlotOrientation.VERTICAL, true, true, true);
-		chart.getXYPlot().getRenderer().setSeriesPaint(0, Color.blue);
-		final XYPlot plot = chart.getXYPlot();
-        ValueAxis axis = plot.getDomainAxis();
-        axis.setAutoRange(true);
-        axis.setFixedAutoRange(60000.0);  // 60 seconds
-        axis = plot.getRangeAxis();
-        axis.setRange(0.0, 200.0);   
-        Chart_1.setLayout(null);
-        ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setBounds(0, 0, 239, 264);
-        chartPanel.setPreferredSize(new java.awt.Dimension(239, 200));
-        Chart_1.add(chartPanel);
+		/*Temperature_Chart temp=new Temperature_Chart();
+		temp.Temperature(1, 43.6);
+        Chart_1.add(temp.PanelChart);*/
+		ReceiveDataFactory m1=new ReceiveDataFactory();  
+		Thread t =new Thread(m1);  
+		t.start();  
+		Chart_1.add(ReceiveDataFactory.PanelTemp);
         
         JPanel Chart_2 = new JPanel();
-        Chart_2.setBounds(263, 38, 256, 263);
+        Chart_2.setBounds(275, 38, 256, 263);
         Charts.add(Chart_2);
-        
-        //ChartPanel chartPanel_1 = new ChartPanel((JFreeChart) null);
-        //Chart_2.add(chartPanel_1);
-        XYDataset data1 = new XYSeriesCollection(this.series1);
-		JFreeChart chart1 = ChartFactory.createXYLineChart("Pressure graph", "Time",
-		    "Temperature (deg C)", data1, PlotOrientation.VERTICAL, true, true, true);
-		chart1.getXYPlot().getRenderer().setSeriesPaint(0, Color.blue);
-		final XYPlot plot1 = chart1.getXYPlot();
-        ValueAxis axis1 = plot1.getDomainAxis();
-        axis1.setAutoRange(true);
-        axis1.setFixedAutoRange(60000.0);  // 60 seconds
-        axis1 = plot.getRangeAxis();
-        axis1.setRange(0.0, 200.0);
-        Chart_2.setLayout(null);
-        ChartPanel chartPanel_1 = new ChartPanel(chart1);
-        chartPanel_1.setBounds(0, 0, 256, 265);
-        chartPanel_1.setPreferredSize(new java.awt.Dimension(256, 200));
-        Chart_2.add(chartPanel_1);
+        Chart_2.add(ReceiveDataFactory.PanelPress);
         
         JPanel Chart_3 = new JPanel();
         Chart_3.setLayout(null);
-        Chart_3.setBounds(532, 38, 256, 263);
+        Chart_3.setBounds(543, 38, 256, 263);
         Charts.add(Chart_3);
-        XYDataset data2 = new XYSeriesCollection(this.series2);
-		JFreeChart chart2 = ChartFactory.createXYLineChart("Humidity graph", "Time",
-		    "Temperature (deg C)", data2, PlotOrientation.VERTICAL, true, true, true);
-		chart2.getXYPlot().getRenderer().setSeriesPaint(0, Color.blue);
-		final XYPlot plot2 = chart1.getXYPlot();
-        ValueAxis axis2 = plot2.getDomainAxis();
-        axis2.setAutoRange(true);
-        axis2.setFixedAutoRange(60000.0);  // 60 seconds
-        axis2 = plot2.getRangeAxis();
-        axis2.setRange(0.0, 200.0);
-        Chart_3.setLayout(null);
-        ChartPanel chartPanel_2 = new ChartPanel(chart2);
-        chartPanel_2.setBounds(0, 0, 256, 265);
-        chartPanel_2.setPreferredSize(new java.awt.Dimension(256, 200));
-        Chart_3.add(chartPanel_2);
+        Chart_3.add(ReceiveDataFactory.PanelHum);
        
         
 		JPanel panel_2 = new JPanel();
@@ -174,29 +135,6 @@ public class Gui extends ApplicationFrame implements Runnable{
 		frame.getContentPane().add(panel_3);
 	}
 
-	
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
-		for (;;)
-        {
-			int i=0;
-        	try {
-				Thread.sleep(100);
-				
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        	/*final double factor = 0.90 + 0.2 * Math.random();
-            
-            this.lastValue = this.lastValue * factor;
-            final Millisecond now = new Millisecond();
-            System.out.println("Now = " + now.toString());
-            this.series.add(new Millisecond(), this.lastValue);*/
-        	this.series.add( i++, Math.random() * 1000);
-            }
-        }
+
 	}
 
