@@ -51,6 +51,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JScrollPane;
 import javax.swing.JInternalFrame;
 import java.awt.Font;
+import javax.swing.DefaultComboBoxModel;
 
 public class Gui extends ApplicationFrame {
 	protected JFrame frame;
@@ -60,6 +61,10 @@ public class Gui extends ApplicationFrame {
 	private JCheckBox[] board_connectivity = new JCheckBox[7];
 
 	private Thread t;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -238,6 +243,86 @@ public class Gui extends ApplicationFrame {
 		panel_2.setBounds(0, 374, 484, 272);
 		frame.getContentPane().add(panel_2);
 		panel_2.setLayout(null);
+		
+		JLabel lblTelecommands = new JLabel("Telecommands");
+		lblTelecommands.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblTelecommands.setBounds(28, 6, 138, 16);
+		panel_2.add(lblTelecommands);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"FACT_01", "FACT_02", "FACT_03", "FACT_04", "FACT_05", "FACT_06", "FACT_07"}));
+		comboBox.setBounds(328, 6, 150, 27);
+		panel_2.add(comboBox);
+		
+		JLabel lblConnectTo = new JLabel("connect to: ");
+		lblConnectTo.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblConnectTo.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		lblConnectTo.setBounds(189, 10, 138, 16);
+		panel_2.add(lblConnectTo);
+		
+		JButton btnAlarmOn = new JButton("Alarm ON");
+		btnAlarmOn.setBounds(16, 154, 117, 29);
+		panel_2.add(btnAlarmOn);
+		
+		JButton btnAlarmOff = new JButton("Alarm OFF");
+		btnAlarmOff.setBounds(16, 184, 117, 29);
+		panel_2.add(btnAlarmOff);
+		
+		JButton btnLedOn = new JButton("LED ON");
+		btnLedOn.setBounds(169, 154, 117, 29);
+		panel_2.add(btnLedOn);
+		
+		JButton btnLedOff = new JButton("LED OFF");
+		btnLedOff.setBounds(169, 184, 117, 29);
+		panel_2.add(btnLedOff);
+		
+		JButton btnRelayOn = new JButton("Relay ON");
+		btnRelayOn.setBounds(328, 154, 117, 29);
+		panel_2.add(btnRelayOn);
+		
+		JButton btnRelayOff = new JButton("Relay OFF");
+		btnRelayOff.setBounds(328, 184, 117, 29);
+		panel_2.add(btnRelayOff);
+		
+		textField = new JTextField();
+		textField.setBounds(16, 225, 281, 26);
+		panel_2.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnSendToDsp = new JButton("Send to DSP");
+		btnSendToDsp.setBounds(328, 225, 130, 29);
+		panel_2.add(btnSendToDsp);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(16, 81, 117, 26);
+		panel_2.add(textField_1);
+		
+		JButton btnTmpThrs = new JButton("TMP THRS");
+		btnTmpThrs.setBounds(16, 108, 117, 29);
+		panel_2.add(btnTmpThrs);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(169, 81, 117, 26);
+		panel_2.add(textField_2);
+		
+		JButton btnHumThrs = new JButton("HUM THRS");
+		btnHumThrs.setBounds(169, 108, 117, 29);
+		panel_2.add(btnHumThrs);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(328, 81, 117, 26);
+		panel_2.add(textField_3);
+		
+		JButton btnPreThrs = new JButton("PRE THRS");
+		btnPreThrs.setBounds(328, 108, 117, 29);
+		panel_2.add(btnPreThrs);
+		
+		JButton btnNewButton = new JButton("Get board sensors");
+		btnNewButton.setBounds(249, 38, 229, 29);
+		panel_2.add(btnNewButton);
 		
 		
 		JPanel panel_3 = new JPanel();
