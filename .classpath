@@ -7,9 +7,8 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="/home/vishal/Downloads/xchart-3.60/xchart-3.6.0.jar"/>
-	<classpathentry kind="lib" path="/home/vishal/Downloads/xchart-3.60/xchart-demo-3.6.0.jar"/>
-	<classpathentry kind="lib" path="/home/vishal/Downloads/jfreechart-1.0.19/jfreechart-1.0.19-demo.jar"/>
 	<classpathentry kind="lib" path="/Users/MarioGabriel/eclipse-workspace/jfreechart-1.0.19/jfreechart-1.0.19-demo.jar"/>
+	<classpathentry kind="lib" path="/Users/MarioGabriel/eclipse-workspace/xchart-3.60/xchart-3.6.0.jar"/>
+	<classpathentry kind="lib" path="/Users/MarioGabriel/eclipse-workspace/xchart-3.60/xchart-demo-3.6.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

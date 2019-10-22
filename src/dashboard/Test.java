@@ -9,29 +9,17 @@ public class Test {
         EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					Gui window = new Gui("Factory of the Future");
 					window.pack();
 					window.frame.setVisible(true);
+					System.out.print("finished initialization");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-        
-//        public static void main(String[] args) {
-//    		EventQueue.invokeLater(new Runnable() {
-//    			public void run() {
-//    				try {
-//    					Gui window = new Gui("Factory of the Future");
-//    					window.pack();
-//    					RefineryUtilities.centerFrameOnScreen(window);
-//    					window.frame.setVisible(true);
-//    				} catch (Exception e) {
-//    					e.printStackTrace();
-//    				}
-//    			}
-//    		});
-//    	}
+    
         System.out.println("Program finished\n");
     }
 }

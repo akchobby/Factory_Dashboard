@@ -59,6 +59,21 @@ public class Gui extends ApplicationFrame {
 	private JCheckBox[] board_connectivity = new JCheckBox[7];
 
 	private Thread t;
+	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Gui window = new Gui("Factory of the Future");
+					window.pack();
+					RefineryUtilities.centerFrameOnScreen(window);
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the application.
@@ -66,8 +81,9 @@ public class Gui extends ApplicationFrame {
 	//@SuppressWarnings("deprecation")
 	public Gui(final String title) {
 		super(title);
+		System.out.println("initializing GUI");
 		initialize();
-		RefineryUtilities.centerFrameOnScreen(this);
+		//RefineryUtilities.centerFrameOnScreen(this);
 		this.fetchingData = new FetchingData(this);
 	}
 
@@ -166,11 +182,6 @@ public class Gui extends ApplicationFrame {
 		checkBox_6.setBounds(6, 216, 26, 20);
 		panel.add(checkBox_6);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		panel_1.setBounds(162, 0, 836, 375);
-		frame.getContentPane().add(panel_1);
-		
 		JPanel Charts = new JPanel();
 		Charts.setBounds(175, 0, 811, 375);
 		frame.getContentPane().add(Charts);
@@ -226,6 +237,11 @@ public class Gui extends ApplicationFrame {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel.setBounds(6, 6, 126, 16);
 		panel_3.add(lblNewLabel);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		panel_1.setBounds(162, 0, 836, 375);
+		frame.getContentPane().add(panel_1);
 	}
 	
 	public void addLog(String log) {
