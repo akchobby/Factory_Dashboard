@@ -19,13 +19,14 @@ public class FactoryTelecommand {
 		this.gui.addLog("Initialized FactoryTelecommand ...");
 	}
 
-	public String sendTelecommand(int host, String message) {
-		this.gui.addLog("==========| Sending Telecommand");
+	private String sendTelecommand(int host, String message) {
+		this.gui.addLog("==========| Sending Telecommand " + message);
 		try {
 			Socket clientSocket;
 			PrintWriter out;
 			BufferedReader in;
 			String host_ip = "192.168.47.".concat(Integer.toString(this.ipList[host]));
+			this.gui.addLog("[" + host + "] - " + host_ip + " - "+ message);
 			clientSocket = new Socket();
 			clientSocket.connect(new InetSocketAddress(host_ip, PORT), TIMEOUT);
 
@@ -52,15 +53,15 @@ public class FactoryTelecommand {
 		return "err";
 	}
 	
-	public String setAlarmState(int host, boolean state) {
+	public String setAlarmState(int host, int state) {
 		return this.sendTelecommand(host, "S_ALA:" + state);
 	}
 	
-	public String setLEDState(int host, boolean state) {
+	public String setLEDState(int host, int state) {
 		return this.sendTelecommand(host, "S_LED:" + state);
 	}
 	
-	public String setRelayState(int host, boolean state) {
+	public String setRelayState(int host, int state) {
 		return this.sendTelecommand(host, "S_REL:" + state);
 	}
 	
@@ -68,7 +69,7 @@ public class FactoryTelecommand {
 		return this.sendTelecommand(host, "S_LCD:" + message);
 	}
 	
-	public String getBoardSensors(int host, String message) {
+	public String getBoardSensors(int host) {
 		return this.sendTelecommand(host, "G_SEL");
 	}
 }
