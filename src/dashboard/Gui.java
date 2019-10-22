@@ -50,6 +50,7 @@ import javax.swing.JLabel;
 import javax.swing.JSplitPane;
 import javax.swing.JScrollPane;
 import javax.swing.JInternalFrame;
+import java.awt.Font;
 
 public class Gui extends ApplicationFrame {
 	protected JFrame frame;
@@ -109,14 +110,18 @@ public class Gui extends ApplicationFrame {
 		btnScan.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				fetchingData.fetchAvailableBoards();
+				boolean[] res = fetchingData.fetchAvailableBoards();
+				for (int i=0; i<7; i++) {
+					board_connectivity[i].setSelected(res[i]);
+				}
 			}
 		});
 		btnScan.setBounds(6, 248, 141, 29);
 		panel.add(btnScan);
 		
 		JLabel lblAvailableBoards = new JLabel("Available Boards");
-		lblAvailableBoards.setBounds(20, 18, 103, 16);
+		lblAvailableBoards.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblAvailableBoards.setBounds(17, 18, 130, 16);
 		panel.add(lblAvailableBoards);
 		
 		JLabel lblFact = new JLabel("Fact_02");
@@ -147,48 +152,62 @@ public class Gui extends ApplicationFrame {
 		label_5.setBounds(34, 218, 103, 16);
 		panel.add(label_5);
 		
-		JCheckBox checkBox = new JCheckBox("");
-		checkBox.setEnabled(false);
-		checkBox.setBounds(6, 50, 26, 20);
-		panel.add(checkBox);
+		board_connectivity[0] = new JCheckBox("");
+		board_connectivity[0].setEnabled(false);
+		board_connectivity[0].setBounds(6, 50, 26, 20);
+		panel.add(board_connectivity[0]);
 		
-		JCheckBox checkBox_1 = new JCheckBox("");
-		checkBox_1.setEnabled(false);
-		checkBox_1.setBounds(6, 76, 26, 20);
-		panel.add(checkBox_1);
+		board_connectivity[1] = new JCheckBox("");
+		board_connectivity[1].setEnabled(false);
+		board_connectivity[1].setBounds(6, 76, 26, 20);
+		panel.add(board_connectivity[1]);
 		
-		JCheckBox checkBox_2 = new JCheckBox("");
-		checkBox_2.setEnabled(false);
-		checkBox_2.setBounds(6, 104, 26, 20);
-		panel.add(checkBox_2);
+		board_connectivity[2] = new JCheckBox("");
+		board_connectivity[2].setEnabled(false);
+		board_connectivity[2].setBounds(6, 104, 26, 20);
+		panel.add(board_connectivity[2]);
 		
-		JCheckBox checkBox_3 = new JCheckBox("");
-		checkBox_3.setEnabled(false);
-		checkBox_3.setBounds(6, 132, 26, 20);
-		panel.add(checkBox_3);
+		board_connectivity[3] = new JCheckBox("");
+		board_connectivity[3].setEnabled(false);
+		board_connectivity[3].setBounds(6, 132, 26, 20);
+		panel.add(board_connectivity[3]);
 		
-		JCheckBox checkBox_4 = new JCheckBox("");
-		checkBox_4.setEnabled(false);
-		checkBox_4.setBounds(6, 160, 26, 20);
-		panel.add(checkBox_4);
+		board_connectivity[4] = new JCheckBox("");
+		board_connectivity[4].setEnabled(false);
+		board_connectivity[4].setBounds(6, 160, 26, 20);
+		panel.add(board_connectivity[4]);
 		
-		JCheckBox checkBox_5 = new JCheckBox("");
-		checkBox_5.setEnabled(false);
-		checkBox_5.setBounds(6, 188, 26, 20);
-		panel.add(checkBox_5);
+		board_connectivity[5] = new JCheckBox("");
+		board_connectivity[5].setEnabled(false);
+		board_connectivity[5].setBounds(6, 188, 26, 20);
+		panel.add(board_connectivity[5]);
 		
-		JCheckBox checkBox_6 = new JCheckBox("");
-		checkBox_6.setEnabled(false);
-		checkBox_6.setBounds(6, 216, 26, 20);
-		panel.add(checkBox_6);
+		board_connectivity[6] = new JCheckBox("");
+		board_connectivity[6].setEnabled(false);
+		board_connectivity[6].setBounds(6, 216, 26, 20);
+		panel.add(board_connectivity[6]);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(0, 0, 163, 83);
+		frame.getContentPane().add(panel_4);
+		panel_4.setLayout(null);
+		panel_4.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		
+		JLabel lblDashboard = new JLabel("Dashboard");
+		lblDashboard.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDashboard.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblDashboard.setBounds(16, 20, 130, 16);
+		panel_4.add(lblDashboard);
 		
 		JPanel Charts = new JPanel();
-		Charts.setBounds(175, 0, 811, 375);
+		Charts.setBounds(175, 6, 811, 363);
 		frame.getContentPane().add(Charts);
 		Charts.setLayout(null);
 		
 		JLabel lblRealtimeCharts = new JLabel("Real-Time Charts");
-		lblRealtimeCharts.setBounds(214, 11, 116, 15);
+		lblRealtimeCharts.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRealtimeCharts.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblRealtimeCharts.setBounds(275, 11, 256, 15);
 		Charts.add(lblRealtimeCharts);
 		
 		JPanel Chart_1 = new JPanel();
@@ -234,6 +253,7 @@ public class Gui extends ApplicationFrame {
 		this.doc = this.textPane.getStyledDocument();
 		
 		JLabel lblNewLabel = new JLabel("Console Logs");
+		lblNewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel.setBounds(6, 6, 126, 16);
 		panel_3.add(lblNewLabel);
@@ -247,7 +267,5 @@ public class Gui extends ApplicationFrame {
 	public void addLog(String log) {
 		textPane.setText(log + "\n" + textPane.getText() );
 	}
-
-
 	}
 
