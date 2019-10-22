@@ -100,49 +100,16 @@ public class ClientHandler extends Thread  {
 		 int factory_id= Integer.parseInt(str_array[0].split(":")[1]);
 		 System.out.println(factory_id); 
 		 double temperature=Double.parseDouble(str_array[1].split(":")[1]);
-		 double humidity=Double.parseDouble(str_array[2].split(":")[1]);
-		 double pressure=Double.parseDouble(str_array[3].split(":")[1]);
-		 int time=Integer.parseInt(str_array[4].split(":")[1]);
-		 switch (factory_id) {
-		 case 1: 
-			  ReceiveDataFactory.series_temp[0].add(time,temperature);
-			  ReceiveDataFactory.series_press[0].add(time,pressure);
-			  ReceiveDataFactory.series_hum[0].add(time,humidity);
-		 			break;
-		 case 2: 
-			  ReceiveDataFactory.series_temp[1].add(time,temperature);
-			  ReceiveDataFactory.series_press[1].add(time,pressure);
-			  ReceiveDataFactory.series_hum[1].add(time,humidity);
-		 			break;
-		 case 3: 
-			  ReceiveDataFactory.series_temp[2].add(time,temperature);
-			  ReceiveDataFactory.series_press[2].add(time,pressure);
-			  ReceiveDataFactory.series_hum[2].add(time,humidity);
-		 			break;
-		 case 4: 
-			  ReceiveDataFactory.series_temp[3].add(time,temperature);
-			  ReceiveDataFactory.series_press[3].add(time,pressure);
-			  ReceiveDataFactory.series_hum[3].add(time,humidity);
-		 			break;
-		 case 5: 
-			  ReceiveDataFactory.series_temp[4].add(time,temperature);
-			  ReceiveDataFactory.series_press[4].add(time,pressure);
-			  ReceiveDataFactory.series_hum[4].add(time,humidity);
-		 			break;
-		 case 6: 
-			  ReceiveDataFactory.series_temp[5].add(time,temperature);
-			  ReceiveDataFactory.series_press[5].add(time,pressure);
-			  ReceiveDataFactory.series_hum[5].add(time,humidity);
-		 			break;
-		 case 7: 
-			  ReceiveDataFactory.series_temp[6].add(time,temperature);
-			  ReceiveDataFactory.series_press[6].add(time,pressure);
-			  ReceiveDataFactory.series_hum[6].add(time,humidity);
-		 			break;
+		 double humidity=Double.parseDouble(str_array[3].split(":")[1]);
+		 double pressure=Double.parseDouble(str_array[2].split(":")[1]);
+		 double time=Double.parseDouble(str_array[4].split(":")[1]);
+		 for (int i=1;;i++) {
+			 if(i==factory_id) {
+			  ReceiveDataFactory.series_temp[i-1].add(time,temperature);
+			  ReceiveDataFactory.series_press[i-1].add(time,pressure);
+			  ReceiveDataFactory.series_hum[i-1].add(time,humidity);
+			  break;
+			 }
 		 }
-      
-      
-      //temp.Temperature(factory_id, temperature);
-      //Panel=temp.PanelChart;
 	}
 }
