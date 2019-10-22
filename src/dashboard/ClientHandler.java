@@ -27,24 +27,27 @@ public class ClientHandler extends Thread  {
 	    final DataInputStream dis; 
 	    final DataOutputStream dos; 
 	    final Socket s;
+	    static int buffer[]=new int[7];
 	    //public ChartPanel Panel; 
-	  
+	    public int client_id;
+	    
+	    
 	    // Constructor 
-	    public ClientHandler(Socket s, DataInputStream dis, DataOutputStream dos)  
+	    public ClientHandler(Socket s, DataInputStream dis, DataOutputStream dos, int client_id)  
 	    { 
 	     
 	    	//this.Panel = null;
 			this.s = s; 
 	    	this.dis = dis; 
 	    	this.dos = dos; 
-	    	
+	    	this.client_id=client_id;
     		
 	    } 
 
  @Override
  public void run()  
  { 
-     String received; 
+     String received =null; 
      String toreturn; 
      while (true)  
      { 
@@ -55,8 +58,13 @@ public class ClientHandler extends Thread  {
                          "Type Exit to terminate connection."); 
                */
              // receive the answer from client 
-             received = dis.readUTF(); 
-               
+             received = dis.readUTF();
+        	 //byte[] test = new byte[296];
+        	 //dis.read(test, 0, 100);
+        	 System.out.println(received);
+        	 
+        	 
+        	 
              if(received.equals("Exit")) 
              {  
                  System.out.println("Client " + this.s + " sends exit..."); 
@@ -68,7 +76,7 @@ public class ClientHandler extends Thread  {
              System.out.println(received); 
              // creating Date object 
              //Date date = new Date(); 
-             FormatMessage(received); 
+             FormatMessage(this.client_id,received); 
             
              // write on output stream based on the 
              // answer from the client  
@@ -93,21 +101,27 @@ public class ClientHandler extends Thread  {
  } 
 
  
-  public void FormatMessage(String received) {
+  public void FormatMessage(int client_id,String received) {
 	  
 	  //ReceiveDataFactory receive= new ReceiveDataFactory();
 		 String[] str_array= received.split(",");
-		 int factory_id= Integer.parseInt(str_array[0].split(":")[1]);
-		 System.out.println(factory_id); 
+		 //int factory_id= Integer.parseInt(str_array[0].split(":")[1]);
+		 System.out.println(client_id); 
 		 double temperature=Double.parseDouble(str_array[1].split(":")[1]);
 		 double humidity=Double.parseDouble(str_array[3].split(":")[1]);
 		 double pressure=Double.parseDouble(str_array[2].split(":")[1]);
 		 double time=Double.parseDouble(str_array[4].split(":")[1]);
 		 for (int i=1;;i++) {
-			 if(i==factory_id) {
+			 if(i==client_id) {
+				 buffer[i-1]++;
 			  ReceiveDataFactory.series_temp[i-1].add(time,temperature);
 			  ReceiveDataFactory.series_press[i-1].add(time,pressure);
 			  ReceiveDataFactory.series_hum[i-1].add(time,humidity);
+			  if(buffer[i-1]==20) {
+			  	ReceiveDataFactory.series_hum[i-1].clear();
+			  	ReceiveDataFactory.series_press[i-1].clear();
+			  	ReceiveDataFactory.series_temp[i-1].clear();
+			  }
 			  break;
 			 }
 		 }

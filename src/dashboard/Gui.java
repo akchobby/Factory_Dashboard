@@ -54,6 +54,8 @@ import java.awt.Font;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.Checkbox;
+import java.awt.Label;
 
 public class Gui extends ApplicationFrame {
 	protected JFrame frame;
@@ -240,29 +242,70 @@ public class Gui extends ApplicationFrame {
 		Chart_3.setBounds(543, 38, 256, 263);
 		Charts.add(Chart_3);
 		Chart_3.add(ReceiveDataFactory.PanelHum);
+		
+		JPanel Prediction = new JPanel();
+		Prediction.setBounds(12, 308, 787, 55);
+		Charts.add(Prediction);
+		Prediction.setLayout(null);
+		
+		JLabel lblPrediction = new JLabel("Prediction");
+		lblPrediction.setBounds(12, 0, 82, 21);
+		Prediction.add(lblPrediction);
+		
+		JCheckBox chckbxFact = new JCheckBox("Fact_01");
+		chckbxFact.setBounds(118, -1, 126, 23);
+		Prediction.add(chckbxFact);
+		
+		JCheckBox chckbxFact_1 = new JCheckBox("Fact_02");
+		chckbxFact_1.setBounds(118, 24, 126, 23);
+		Prediction.add(chckbxFact_1);
+		
+		JCheckBox chckbxFact_2 = new JCheckBox("Fact_03");
+		chckbxFact_2.setBounds(248, -1, 126, 23);
+		Prediction.add(chckbxFact_2);
+		
+		JCheckBox chckbxFact_3 = new JCheckBox("Fact_04");
+		chckbxFact_3.setBounds(248, 24, 126, 23);
+		Prediction.add(chckbxFact_3);
+		
+		JCheckBox chckbxFact_4 = new JCheckBox("Fact_05");
+		chckbxFact_4.setBounds(391, -1, 126, 23);
+		Prediction.add(chckbxFact_4);
+		
+		JCheckBox chckbxFact_5 = new JCheckBox("Fact_06");
+		chckbxFact_5.setBounds(391, 24, 126, 23);
+		Prediction.add(chckbxFact_5);
+		
+		JCheckBox chckbxFact_6 = new JCheckBox("Fact_07");
+		chckbxFact_6.setBounds(527, -1, 126, 23);
+		Prediction.add(chckbxFact_6);
+		
+		JButton btnResults = new JButton("Results");
+		btnResults.setBounds(673, 23, 114, 25);
+		Prediction.add(btnResults);
 
 
-		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		panel_2.setBounds(0, 374, 484, 272);
-		frame.getContentPane().add(panel_2);
-		panel_2.setLayout(null);
+		JPanel btGetButton = new JPanel();
+		btGetButton.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		btGetButton.setBounds(0, 374, 484, 272);
+		frame.getContentPane().add(btGetButton);
+		btGetButton.setLayout(null);
 
 		JLabel lblTelecommands = new JLabel("Telecommands");
 		lblTelecommands.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		lblTelecommands.setBounds(28, 6, 138, 16);
-		panel_2.add(lblTelecommands);
+		btGetButton.add(lblTelecommands);
 
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"FACT_01", "FACT_02", "FACT_03", "FACT_04", "FACT_05", "FACT_06", "FACT_07"}));
 		comboBox.setBounds(328, 6, 150, 27);
-		panel_2.add(comboBox);
+		btGetButton.add(comboBox);
 
 		JLabel lblConnectTo = new JLabel("connect to: ");
 		lblConnectTo.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblConnectTo.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		lblConnectTo.setBounds(189, 10, 138, 16);
-		panel_2.add(lblConnectTo);
+		btGetButton.add(lblConnectTo);
 
 		JButton btnAlarmOn = new JButton("Alarm ON");
 		btnAlarmOn.addMouseListener(new MouseAdapter() {
@@ -271,10 +314,11 @@ public class Gui extends ApplicationFrame {
 				telecommand.setAlarmState(comboBox.getSelectedIndex(), 1);
 			}
 		});
-		btnAlarmOn.setBounds(16, 154, 117, 29);
-		panel_2.add(btnAlarmOn);
+		btnAlarmOn.setBounds(16, 143, 103, 29);
+		btGetButton.add(btnAlarmOn);
 
 		JButton btnAlarmOff = new JButton("Alarm OFF");
+		btnAlarmOff.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnAlarmOff.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -282,7 +326,7 @@ public class Gui extends ApplicationFrame {
 			}
 		});
 		btnAlarmOff.setBounds(16, 184, 117, 29);
-		panel_2.add(btnAlarmOff);
+		btGetButton.add(btnAlarmOff);
 
 		JButton btnLedOn = new JButton("LED ON");
 		btnLedOn.addMouseListener(new MouseAdapter() {
@@ -291,8 +335,8 @@ public class Gui extends ApplicationFrame {
 				telecommand.setLEDState(comboBox.getSelectedIndex(), 1);
 			}
 		});
-		btnLedOn.setBounds(169, 154, 117, 29);
-		panel_2.add(btnLedOn);
+		btnLedOn.setBounds(143, 143, 108, 29);
+		btGetButton.add(btnLedOn);
 
 		JButton btnLedOff = new JButton("LED OFF");
 		btnLedOff.addMouseListener(new MouseAdapter() {
@@ -301,8 +345,8 @@ public class Gui extends ApplicationFrame {
 				telecommand.setLEDState(comboBox.getSelectedIndex(), 0);
 			}
 		});
-		btnLedOff.setBounds(169, 184, 117, 29);
-		panel_2.add(btnLedOff);
+		btnLedOff.setBounds(145, 184, 108, 29);
+		btGetButton.add(btnLedOff);
 
 		JButton btnRelayOn = new JButton("Relay ON");
 		btnRelayOn.addMouseListener(new MouseAdapter() {
@@ -311,8 +355,8 @@ public class Gui extends ApplicationFrame {
 				telecommand.setRelayState(comboBox.getSelectedIndex(), 1);
 			}
 		});
-		btnRelayOn.setBounds(328, 154, 117, 29);
-		panel_2.add(btnRelayOn);
+		btnRelayOn.setBounds(272, 143, 103, 29);
+		btGetButton.add(btnRelayOn);
 
 		JButton btnRelayOff = new JButton("Relay OFF");
 		btnRelayOff.addMouseListener(new MouseAdapter() {
@@ -321,12 +365,12 @@ public class Gui extends ApplicationFrame {
 				telecommand.setLEDState(comboBox.getSelectedIndex(), 0);
 			}
 		});
-		btnRelayOff.setBounds(328, 184, 117, 29);
-		panel_2.add(btnRelayOff);
+		btnRelayOff.setBounds(265, 184, 110, 29);
+		btGetButton.add(btnRelayOff);
 
 		textField = new JTextField();
-		textField.setBounds(16, 225, 281, 26);
-		panel_2.add(textField);
+		textField.setBounds(16, 225, 124, 26);
+		btGetButton.add(textField);
 		textField.setColumns(10);
 
 		JButton btnSendToDsp = new JButton("Send to DSP");
@@ -336,39 +380,82 @@ public class Gui extends ApplicationFrame {
 				telecommand.setDisplayMessage(comboBox.getSelectedIndex(), textField.getText());
 			}
 		});
-		btnSendToDsp.setBounds(328, 225, 130, 29);
-		panel_2.add(btnSendToDsp);
+		btnSendToDsp.setBounds(155, 223, 130, 29);
+		btGetButton.add(btnSendToDsp);
 
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(16, 81, 117, 26);
-		panel_2.add(textField_1);
+		textField_1.setBounds(16, 81, 103, 26);
+		btGetButton.add(textField_1);
 
 		JButton btnTmpThrs = new JButton("TMP THRS");
-		btnTmpThrs.setBounds(16, 108, 117, 29);
-		panel_2.add(btnTmpThrs);
+		btnTmpThrs.addMouseMotionListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				telecommand.setTempThreshold(comboBox.getSelectedIndex(), textField_1.getText());
+			}
+		});
+		btnTmpThrs.setBounds(16, 108, 103, 27);
+		btGetButton.add(btnTmpThrs);
 
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
-		textField_2.setBounds(169, 81, 117, 26);
-		panel_2.add(textField_2);
+		textField_2.setBounds(143, 81, 103, 26);
+		btGetButton.add(textField_2);
 
 		JButton btnHumThrs = new JButton("HUM THRS");
-		btnHumThrs.setBounds(169, 108, 117, 29);
-		panel_2.add(btnHumThrs);
+		btnHumThrs.addMouseMotionListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				telecommand.setHumThreshold(comboBox.getSelectedIndex(), textField_2.getText());
+			}
+		});
+		btnHumThrs.setBounds(143, 107, 117, 29);
+		btGetButton.add(btnHumThrs);
 
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		textField_3.setBounds(328, 81, 117, 26);
-		panel_2.add(textField_3);
+		textField_3.setBounds(272, 81, 103, 26);
+		btGetButton.add(textField_3);
 
 		JButton btnPreThrs = new JButton("PRE THRS");
-		btnPreThrs.setBounds(328, 108, 117, 29);
-		panel_2.add(btnPreThrs);
+		btnPreThrs.addMouseMotionListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				telecommand.setPresThreshold(comboBox.getSelectedIndex(), textField_3.getText());
+			}
+		});
+		btnPreThrs.setBounds(272, 107, 103, 29);
+		btGetButton.add(btnPreThrs);
 
 		JButton btnNewButton = new JButton("Get board sensors");
+		btnNewButton.addMouseMotionListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				telecommand.getBoardSensors(comboBox.getSelectedIndex());
+			}
+		});
 		btnNewButton.setBounds(249, 38, 229, 29);
-		panel_2.add(btnNewButton);
+		btGetButton.add(btnNewButton);
+		
+		Label get_status = new Label("Get Status:");
+		get_status.setBounds(393, 91, 81, 21);
+		btGetButton.add(get_status);
+		
+		JComboBox status_gpios = new JComboBox();
+		status_gpios.setModel(new DefaultComboBoxModel(new String[] {"G_IOL", "G_IOS", "S_IOS", "G_IOD", "S_IOD", "FACT_06", "S_IOR"}));
+		status_gpios.setBounds(387, 118, 85, 24);
+		btGetButton.add(status_gpios);
+		
+		JButton btnGetStatus = new JButton("Status");
+		btnGetStatus.addMouseMotionListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				telecommand.getBoardSensors(status_gpios.getSelectedIndex());//TODO: tomorow change to required fuction calls
+			}
+		});
+		btnGetStatus.setBounds(382, 145, 96, 25);
+		btGetButton.add(btnGetStatus);
 
 
 		JPanel panel_3 = new JPanel();

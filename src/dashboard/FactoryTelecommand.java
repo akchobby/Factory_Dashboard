@@ -33,7 +33,7 @@ public class FactoryTelecommand {
 			out = new PrintWriter(clientSocket.getOutputStream(), true);
 			in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-			out.println(message);
+			out.println(message);//i think we need a delay after this statement
 			String resp = in.readLine();
 
 			System.out.print("SUCCESS");
@@ -53,23 +53,34 @@ public class FactoryTelecommand {
 		return "err";
 	}
 	
-	public String setAlarmState(int host, int state) {
-		return this.sendTelecommand(host, "S_ALA:" + state);
-	}
+	public String setAlarmState(int host, int state) {									//TODO
+		return this.sendTelecommand(host, "cmd:S_ALA," +"Id:"+host+",state:" +state); //id to be added
+	}																			//similar for all actuator commands
 	
 	public String setLEDState(int host, int state) {
-		return this.sendTelecommand(host, "S_LED:" + state);
-	}
+		return this.sendTelecommand(host, "cmd:S_LED," +"Id:"+host+",state:"+ state);  //cmd:S_LED, Id:1, state: 1
+	}															//start number of ids from 0
 	
 	public String setRelayState(int host, int state) {
-		return this.sendTelecommand(host, "S_REL:" + state);
+		return this.sendTelecommand(host, "cmd:S_REL"+",Id:"+host+",state:" + state);
 	}
 	
 	public String setDisplayMessage(int host, String message) {
-		return this.sendTelecommand(host, "S_LCD:" + message);
+		return this.sendTelecommand(host, "cmd:S_LCD"+",message:" + message);
 	}
 	
 	public String getBoardSensors(int host) {
-		return this.sendTelecommand(host, "G_SEL");
+		return this.sendTelecommand(host, "cmd:G_SEL,"+"Id:"+host);
 	}
+	public String setTempThreshold(int host, String message) {
+		return this.sendTelecommand(host, "cmd:S_TET,temp_threshold:" + message);
+	}
+	public String setHumThreshold(int host, String message) {
+		return this.sendTelecommand(host, "cmd:S_HUT,hum_threshold:" + message);
+	}
+	public String setPresThreshold(int host, String message) {
+		return this.sendTelecommand(host, "cmd:S_PRT,pres_threshold:" + message);
+	}
+	
+	
 }

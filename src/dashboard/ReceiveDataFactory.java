@@ -38,6 +38,13 @@ public class ReceiveDataFactory implements Runnable {
 	 
 	 XYLineAndShapeRenderer [] r = new XYLineAndShapeRenderer[7];
 	 
+	 private int[] ipList = new int[]{32, 34, 36, 38, 40, 42, 44};
+		private static final int PORT = 8080;
+		private static final int TIMEOUT = 2000;
+		private Gui gui;
+	 
+		int client_id;
+	 
 	public ReceiveDataFactory()  
     { 
 		for (int i=1;i<=7;i++) {
@@ -103,7 +110,7 @@ public class ReceiveDataFactory implements Runnable {
         // server is listening on port 5056 
         ServerSocket ss = null;
 		try {
-			ss = new ServerSocket(5056);
+			ss = new ServerSocket(8080);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -114,26 +121,47 @@ public class ReceiveDataFactory implements Runnable {
         while (true)  
         { 
             Socket s = null; 
-              
+            //client_id=1;
             try 
             { 
                 // socket object to receive incoming client requests 
                 s = ss.accept(); 
-                  
-                System.out.println("A new client is connected : " + s); 
-                  
+                // create a new thread object 
+                
+                
+                String client_ip=s.getRemoteSocketAddress().toString();
+                System.out.println("A new client is connected : " + client_ip.substring(12, 14)); 
+                //System.out.println(client_ip.split(".")[0]); 
                 // obtaining input and out streams 
                 DataInputStream dis = new DataInputStream(s.getInputStream()); 
                 DataOutputStream dos = new DataOutputStream(s.getOutputStream()); 
-                  
+                 
                 System.out.println("Assigning new thread for this client"); 
-  
+                
+                switch(Integer.parseInt(client_ip.substring(12, 14))) {
+                case 32: client_id=1;
+                		break;
+                case 34: client_id=2;
+        				break;
+                case 36: client_id=3;
+        				break;
+                case 38: client_id=4;
+        				break;
+                case 40: client_id=5;
+        				break;
+                case 42: client_id=6;
+        				break;
+                case 44: client_id=7;
+        				break;
+                }
+                
+                
                 // create a new thread object 
-                Thread t = new ClientHandler(s, dis, dos); 
+                Thread t = new ClientHandler(s, dis, dos,client_id); 
                 //Thread t1 = new Thread(new MyClass ());
                 //t1.start();
                 // Invoking the start() method 
-                t.start(); 
+                t.start();
                   
             } 
             catch (Exception e){ 
