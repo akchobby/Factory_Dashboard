@@ -9,7 +9,6 @@ public class Test {
         EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
 					Gui window = new Gui("Factory of the Future");
 					window.pack();
 					window.frame.setVisible(true);

@@ -53,41 +53,55 @@ public class FactoryTelecommand {
 		return "err";
 	}
 	
-	public String setAlarmState(int host, int state) {									//TODO
-		return this.sendTelecommand(host, "cmd:S_ALA," +"Id:"+host+",state:" +state); //id to be added
-	}																			//similar for all actuator commands
+	public String setAlarmState(int host, int state) {									
+		return this.sendTelecommand(host, "cmd:S_ALA,state:" +state); 
+	}																			
 	
 	public String setLEDState(int host, int state) {
-		return this.sendTelecommand(host, "cmd:S_LED," +"Id:"+host+",state:"+ state);  //cmd:S_LED, Id:1, state: 1
-	}															//start number of ids from 0
+		return this.sendTelecommand(host, "cmd:S_LED,state:"+ state);  
+	}															
 	
 	public String setRelayState(int host, int state) {
-		return this.sendTelecommand(host, "cmd:S_REL"+",Id:"+host+",state:" + state);
+		return this.sendTelecommand(host, "cmd:S_REL,state:" + state);
 	}
 	
 	public String setDisplayMessage(int host, String message) {
-		return this.sendTelecommand(host, "cmd:S_LCD"+",message:" + message);
+		return this.sendTelecommand(host, "cmd:S_LCD,message:" + message);
 	}
 	
 	public String getBoardSensors(int host) {
-		return this.sendTelecommand(host, "cmd:G_SEL,"+"Id:"+host);
+		return this.sendTelecommand(host, "cmd:G_SEL");
 	}
+	
 	public String setTempThreshold(int host, String message) {
 		return this.sendTelecommand(host, "cmd:S_TET,temp_threshold:" + message);
 	}
+	
 	public String setHumThreshold(int host, String message) {
 		return this.sendTelecommand(host, "cmd:S_HUT,hum_threshold:" + message);
 	}
+	
 	public String setPresThreshold(int host, String message) {
 		return this.sendTelecommand(host, "cmd:S_PRT,pres_threshold:" + message);
 	}
 	
-	public String getGPIOstatus(int host, int instruction_id) {
-		String message_instruction;
-		switch(instruction_id) {
-		case 0:message="";
+	public String generalGPIO(int host, int instruction_id, String pin, String state) {
+		switch (instruction_id){
+			case 0:
+				return this.sendTelecommand(host, "cmd:G_IOL");
+			case 1:
+				return this.sendTelecommand(host, "cmd:G_IOS,pin:" + pin);
+			case 2:
+				return this.sendTelecommand(host, "cmd:S_IOS,pin:" + pin + ",state:" + state);
+			case 3:
+				return this.sendTelecommand(host, "cmd:G_IOD,pin:" + pin);
+			case 4:
+				return this.sendTelecommand(host, "cmd:S_IOD,pin:" + pin + ",direction:" + state);
+			case 5:
+				return this.sendTelecommand(host, "cmd:S_IOR,pin:" + pin + ",mode:" + state);
 		}
-			return this.sendTelecommand(host, "cmd:S_PRT,pin:" + message);
+		return "";
+		
 	}
 	
 }
