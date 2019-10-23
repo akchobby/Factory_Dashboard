@@ -108,6 +108,7 @@ public class Gui extends ApplicationFrame {
 	//@SuppressWarnings("deprecation")
 	private void initialize()  {
 		frame = new JFrame();
+		frame.setTitle("Factory of the future");
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 998, 668);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -208,9 +209,15 @@ public class Gui extends ApplicationFrame {
 
 		JLabel lblDashboard = new JLabel("Dashboard");
 		lblDashboard.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDashboard.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		lblDashboard.setBounds(16, 20, 130, 16);
+		lblDashboard.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+		lblDashboard.setBounds(16, 20, 130, 22);
 		panel_4.add(lblDashboard);
+		
+		JLabel lblFactoryOfThe = new JLabel("Factory of the future");
+		lblFactoryOfThe.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFactoryOfThe.setFont(new Font("Lucida Grande", Font.BOLD, 11));
+		lblFactoryOfThe.setBounds(16, 54, 130, 16);
+		panel_4.add(lblFactoryOfThe);
 
 		JPanel Charts = new JPanel();
 		Charts.setBounds(175, 6, 811, 363);
