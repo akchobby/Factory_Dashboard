@@ -64,7 +64,7 @@ public class Gui extends ApplicationFrame {
 	private FactoryTelecommand telecommand;
 	private StyledDocument doc;
 	private JCheckBox[] board_connectivity = new JCheckBox[7];
-
+	private machineLearning ML;
 	private Thread t;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -98,6 +98,12 @@ public class Gui extends ApplicationFrame {
 		//RefineryUtilities.centerFrameOnScreen(this);
 		this.fetchingData = new FetchingData(this);
 		this.telecommand = new FactoryTelecommand(this);
+		try {
+			this.ML=new machineLearning(this);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -125,6 +131,8 @@ public class Gui extends ApplicationFrame {
 				boolean[] res = fetchingData.fetchAvailableBoards();
 				for (int i=0; i<7; i++) {
 					board_connectivity[i].setSelected(res[i]);
+					if(res[i]==true)
+						ML.informML(i+1);
 				}
 			}
 		});
@@ -370,7 +378,7 @@ public class Gui extends ApplicationFrame {
 		btGetButton.add(btnRelayOff);
 
 		textField = new JTextField();
-		textField.setBounds(16, 225, 124, 26);
+		textField.setBounds(16, 225, 221, 26);
 		btGetButton.add(textField);
 		textField.setColumns(10);
 
@@ -381,7 +389,7 @@ public class Gui extends ApplicationFrame {
 				telecommand.setDisplayMessage(comboBox.getSelectedIndex(), textField.getText());
 			}
 		});
-		btnSendToDsp.setBounds(155, 223, 130, 29);
+		btnSendToDsp.setBounds(249, 223, 124, 29);
 		btGetButton.add(btnSendToDsp);
 
 		textField_1 = new JTextField();
@@ -440,31 +448,26 @@ public class Gui extends ApplicationFrame {
 		btGetButton.add(btnNewButton);
 		
 		Label get_status = new Label("Get Status:");
-		get_status.setBounds(393, 91, 81, 21);
+		get_status.setBounds(387, 78, 81, 21);
 		btGetButton.add(get_status);
 		
 		JComboBox status_gpios = new JComboBox();
 		status_gpios.setModel(new DefaultComboBoxModel(new String[] {"G_IOL", "G_IOS", "S_IOS", "G_IOD", "S_IOD", "FACT_06", "S_IOR"}));
-		status_gpios.setBounds(387, 118, 85, 24);
+		status_gpios.setBounds(387, 109, 85, 24);
 		btGetButton.add(status_gpios);
 		
 		JButton btnGetStatus = new JButton("Status");
-		btnGetStatus.addMouseMotionListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				telecommand.getGPIOstatus(comboBox.getSelectedIndex(),status_gpios.getSelectedIndex(),pin);//TODO: tomorow change to required fuction calls
-			}
-		});
-		btnGetStatus.setBounds(382, 211, 96, 25);
+		
+		btnGetStatus.setBounds(382, 198, 96, 25);
 		btGetButton.add(btnGetStatus);
 		
 		pin_nb = new JTextField();
-		pin_nb.setBounds(387, 180, 81, 19);
+		pin_nb.setBounds(387, 167, 81, 19);
 		btGetButton.add(pin_nb);
 		pin_nb.setColumns(10);
 		
 		JLabel lblPinNo = new JLabel("Pin No:");
-		lblPinNo.setBounds(385, 157, 66, 15);
+		lblPinNo.setBounds(393, 143, 66, 15);
 		btGetButton.add(lblPinNo);
 
 

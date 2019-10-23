@@ -111,6 +111,7 @@ public class ReceiveDataFactory implements Runnable {
         ServerSocket ss = null;
 		try {
 			ss = new ServerSocket(8080);
+			
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -130,7 +131,8 @@ public class ReceiveDataFactory implements Runnable {
                 
                 
                 String client_ip=s.getRemoteSocketAddress().toString();
-                System.out.println("A new client is connected : " + client_ip.substring(12, 14)); 
+               // System.out.println("A new client is connected : " + client_ip.substring(12, 14));
+                System.out.println("A new client is connected : " + client_ip.toString());
                 //System.out.println(client_ip.split(".")[0]); 
                 // obtaining input and out streams 
                 DataInputStream dis = new DataInputStream(s.getInputStream()); 
@@ -138,7 +140,7 @@ public class ReceiveDataFactory implements Runnable {
                  
                 System.out.println("Assigning new thread for this client"); 
                 
-                switch(Integer.parseInt(client_ip.substring(12, 14))) {
+                /*switch(Integer.parseInt(client_ip.substring(12, 14))) {
                 case 32: client_id=1;
                 		break;
                 case 34: client_id=2;
@@ -153,11 +155,12 @@ public class ReceiveDataFactory implements Runnable {
         				break;
                 case 44: client_id=7;
         				break;
-                }
+                }*/
                 
                 
                 // create a new thread object 
-                Thread t = new ClientHandler(s, dis, dos,client_id); 
+                Thread t = new ClientHandler(s, dis, dos); 
+                //Thread t = new ClientHandler(s, dis, dos); 
                 //Thread t1 = new Thread(new MyClass ());
                 //t1.start();
                 // Invoking the start() method 

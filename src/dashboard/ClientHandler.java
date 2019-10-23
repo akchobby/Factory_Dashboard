@@ -1,6 +1,7 @@
 package dashboard;
 
 import java.text.DateFormat;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -30,17 +31,18 @@ public class ClientHandler extends Thread  {
 	    static int buffer[]=new int[7];
 	    //public ChartPanel Panel; 
 	    public int client_id;
+	    private machineLearning ML;
 	    
 	    
 	    // Constructor 
-	    public ClientHandler(Socket s, DataInputStream dis, DataOutputStream dos, int client_id)  
+	    public ClientHandler(Socket s, DataInputStream dis, DataOutputStream dos)  
 	    { 
 	     
 	    	//this.Panel = null;
 			this.s = s; 
 	    	this.dis = dis; 
 	    	this.dos = dos; 
-	    	this.client_id=client_id;
+	    	
     		
 	    } 
 
@@ -76,7 +78,7 @@ public class ClientHandler extends Thread  {
              System.out.println(received); 
              // creating Date object 
              //Date date = new Date(); 
-             FormatMessage(this.client_id,received); 
+             FormatMessage(received); 
             
              // write on output stream based on the 
              // answer from the client  
@@ -101,22 +103,23 @@ public class ClientHandler extends Thread  {
  } 
 
  
-  public void FormatMessage(int client_id,String received) {
+  public void FormatMessage(String received) {
 	  
 	  //ReceiveDataFactory receive= new ReceiveDataFactory();
 		 String[] str_array= received.split(",");
-		 //int factory_id= Integer.parseInt(str_array[0].split(":")[1]);
+		 int factory_id= Integer.parseInt(str_array[0].split(":")[1]);
 		 System.out.println(client_id); 
 		 double temperature=Double.parseDouble(str_array[1].split(":")[1]);
 		 double humidity=Double.parseDouble(str_array[3].split(":")[1]);
 		 double pressure=Double.parseDouble(str_array[2].split(":")[1]);
 		 double time=Double.parseDouble(str_array[4].split(":")[1]);
 		 for (int i=1;;i++) {
-			 if(i==client_id) {
-				 buffer[i-1]++;
+			 if(i==factory_id) {
+				// buffer[i-1]++;
 			  ReceiveDataFactory.series_temp[i-1].add(time,temperature);
 			  ReceiveDataFactory.series_press[i-1].add(time,pressure);
 			  ReceiveDataFactory.series_hum[i-1].add(time,humidity);
+			 // ML.sendMLData(factory_id, time, temperature, pressure, humidity);
 			  if(buffer[i-1]==20) {
 			  	ReceiveDataFactory.series_hum[i-1].clear();
 			  	ReceiveDataFactory.series_press[i-1].clear();

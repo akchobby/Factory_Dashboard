@@ -82,12 +82,5 @@ public class FactoryTelecommand {
 		return this.sendTelecommand(host, "cmd:S_PRT,pres_threshold:" + message);
 	}
 	
-	public String getGPIOstatus(int host, int instruction_id) {
-		String message_instruction;
-		switch(instruction_id) {
-		case 0:message="";
-		}
-			return this.sendTelecommand(host, "cmd:S_PRT,pin:" + message);
-	}
 	
 }
