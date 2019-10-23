@@ -70,7 +70,8 @@ public class Gui extends ApplicationFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
-
+	private JTextField pin_nb;
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -451,11 +452,20 @@ public class Gui extends ApplicationFrame {
 		btnGetStatus.addMouseMotionListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				telecommand.getBoardSensors(status_gpios.getSelectedIndex());//TODO: tomorow change to required fuction calls
+				telecommand.getGPIOstatus(comboBox.getSelectedIndex(),status_gpios.getSelectedIndex(),pin);//TODO: tomorow change to required fuction calls
 			}
 		});
-		btnGetStatus.setBounds(382, 145, 96, 25);
+		btnGetStatus.setBounds(382, 211, 96, 25);
 		btGetButton.add(btnGetStatus);
+		
+		pin_nb = new JTextField();
+		pin_nb.setBounds(387, 180, 81, 19);
+		btGetButton.add(pin_nb);
+		pin_nb.setColumns(10);
+		
+		JLabel lblPinNo = new JLabel("Pin No:");
+		lblPinNo.setBounds(385, 157, 66, 15);
+		btGetButton.add(lblPinNo);
 
 
 		JPanel panel_3 = new JPanel();

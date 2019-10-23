@@ -33,7 +33,7 @@ public class FactoryTelecommand {
 			out = new PrintWriter(clientSocket.getOutputStream(), true);
 			in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-			out.println(message);//i think we need a delay after this statement
+			out.println(message);
 			String resp = in.readLine();
 
 			System.out.print("SUCCESS");
@@ -82,5 +82,12 @@ public class FactoryTelecommand {
 		return this.sendTelecommand(host, "cmd:S_PRT,pres_threshold:" + message);
 	}
 	
+	public String getGPIOstatus(int host, int instruction_id) {
+		String message_instruction;
+		switch(instruction_id) {
+		case 0:message="";
+		}
+			return this.sendTelecommand(host, "cmd:S_PRT,pin:" + message);
+	}
 	
 }
